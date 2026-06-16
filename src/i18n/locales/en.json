@@ -27,7 +27,8 @@
     "youLost": "Better luck next time!",
     "minBet": "Minimum bet is €1.00",
     "maxBet": "Cannot exceed your balance",
-    "betSuccess": "Bet placed successfully"
+    "betSuccess": "Bet placed successfully",
+    "betPending": "Bet placed — awaiting result..."
   },
   "bets": {
     "title": "My Bets",
@@ -43,6 +44,7 @@
     "win": "Win",
     "lost": "Lost",
     "canceled": "Canceled",
+    "pending": "Pending",
     "filterStatus": "Filter by status",
     "filterById": "Search by ID",
     "noBets": "No bets found",

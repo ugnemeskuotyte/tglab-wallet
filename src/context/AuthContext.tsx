@@ -1,12 +1,17 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react'
 import type { User } from '../types'
+
+const PENDING_DURATION = 5000
 
 interface AuthContextValue {
   user: User | null
   isAuthenticated: boolean
+  pendingBetIds: string[]
   login: (user: User) => void
   logout: () => void
   updateBalance: (balance: number) => void
+  addPendingBet: (id: string, finalBalance: number) => void
+  removePendingBet: (id: string) => void
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -22,6 +27,8 @@ function loadUser(): User | null {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(loadUser)
+  const [pendingBetIds, setPendingBetIds] = useState<string[]>([])
+  const pendingTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
 
   const login = useCallback((userData: User) => {
     localStorage.setItem('accessToken', userData.accessToken)
@@ -44,9 +51,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
   }, [])
 
+  const removePendingBet = useCallback((id: string) => {
+    clearTimeout(pendingTimers.current[id])
+    delete pendingTimers.current[id]
+    setPendingBetIds((prev) => prev.filter((pid) => pid !== id))
+  }, [])
+
+  const addPendingBet = useCallback((id: string, finalBalance: number) => {
+    setPendingBetIds((prev) => [...prev, id])
+    pendingTimers.current[id] = setTimeout(() => {
+      updateBalance(finalBalance)
+      setPendingBetIds((prev) => prev.filter((pid) => pid !== id))
+      delete pendingTimers.current[id]
+    }, PENDING_DURATION)
+  }, [updateBalance])
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, logout, updateBalance }}
+      value={{ user, isAuthenticated: !!user, pendingBetIds, login, logout, updateBalance, addPendingBet, removePendingBet }}
     >
       {children}
     </AuthContext.Provider>

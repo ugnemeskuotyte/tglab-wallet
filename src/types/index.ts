@@ -1,4 +1,4 @@
-export type BetStatus = 'win' | 'lost' | 'canceled'
+export type BetStatus = 'win' | 'lost' | 'canceled' | 'pending'
 export type TransactionType = 'bet' | 'win' | 'cancel'
 
 export interface User {

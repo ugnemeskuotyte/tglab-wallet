@@ -25,8 +25,9 @@ type FormData = { amount: number }
 
 export default function DashboardPage() {
   const { t } = useTranslation()
-  const { user, updateBalance } = useAuth()
+  const { user, updateBalance, addPendingBet } = useAuth()
   const [result, setResult] = useState<BetResult | null>(null)
+  const [isPending, setIsPending] = useState(false)
   const [apiError, setApiError] = useState<string | null>(null)
 
   const schema = buildSchema(user?.balance ?? 0, t)
@@ -41,11 +42,17 @@ export default function DashboardPage() {
   async function onSubmit(data: FormData) {
     setApiError(null)
     setResult(null)
+    setIsPending(false)
     try {
       const res = await placeBet(data.amount)
-      updateBalance(res.balance)
-      setResult(res)
+      updateBalance((user?.balance ?? 0) - data.amount)
+      addPendingBet(res.transactionId, res.balance)
+      setIsPending(true)
       reset()
+      setTimeout(() => {
+        setResult(res)
+        setIsPending(false)
+      }, 5000)
     } catch (err: unknown) {
       setApiError(getErrorMessage(err, t('common.error')))
     }
@@ -91,8 +98,21 @@ export default function DashboardPage() {
           </Button>
         </form>
 
-        <AnimatePresence>
-          {result && (
+        <AnimatePresence mode="wait">
+          {isPending && (
+            <motion.div
+              key="pending"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className={styles.resultPending}
+            >
+              <p className={styles.resultEmoji}>⏳</p>
+              <p className={styles.resultTitlePending}>{t('dashboard.betPending')}</p>
+            </motion.div>
+          )}
+          {result && !isPending && (
             <motion.div
               key={result.transactionId}
               initial={{ opacity: 0, scale: 0.95 }}

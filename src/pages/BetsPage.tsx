@@ -14,7 +14,7 @@ const PAGE_LIMIT = 10
 
 export default function BetsPage() {
   const { t } = useTranslation()
-  const { updateBalance } = useAuth()
+  const { updateBalance, pendingBetIds, removePendingBet } = useAuth()
 
   const [bets, setBets] = useState<Bet[]>([])
   const [total, setTotal] = useState(0)
@@ -41,11 +41,11 @@ export default function BetsPage() {
   useEffect(() => { fetch(filter) }, [filter, fetch])
 
   async function handleCancel(id: string) {
-    if (!confirm(t('bets.cancelConfirm'))) return
     setCancelingId(id)
     try {
       const res = await cancelBet(id)
       updateBalance(res.balance)
+      removePendingBet(id)
       fetch(filter)
     } catch (err: unknown) {
       alert(getErrorMessage(err, t('common.error')))
@@ -104,7 +104,6 @@ export default function BetsPage() {
                   <th className={styles.thRight}>{t('bets.amount')}</th>
                   <th className={styles.thCenter}>{t('bets.status')}</th>
                   <th className={styles.thRight}>{t('bets.prize')}</th>
-                  <th className={styles.thCenter}>{t('bets.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,20 +120,23 @@ export default function BetsPage() {
                       <td className={styles.cellDate}>{formatDateTime(bet.createdAt)}</td>
                       <td className={styles.cellAmount}>{formatEuro(bet.amount)}</td>
                       <td className={styles.cellCenter}>
-                        <Badge variant={bet.status}>{t(`bets.${bet.status}`)}</Badge>
+                        {pendingBetIds.includes(bet.id) ? (
+                          <div className={styles.pendingCell}>
+                            <Badge variant="pending">{t('bets.pending')}</Badge>
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              loading={cancelingId === bet.id}
+                              onClick={() => handleCancel(bet.id)}
+                            >
+                              {t('bets.cancel')}
+                            </Button>
+                          </div>
+                        ) : (
+                          <Badge variant={bet.status}>{t(`bets.${bet.status}`)}</Badge>
+                        )}
                       </td>
-                      <td className={styles.cellPrize}>{bet.winAmount ? formatEuro(bet.winAmount) : '—'}</td>
-                      <td className={styles.cellCenter}>
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          disabled={bet.status === 'canceled'}
-                          loading={cancelingId === bet.id}
-                          onClick={() => handleCancel(bet.id)}
-                        >
-                          {t('bets.cancel')}
-                        </Button>
-                      </td>
+                      <td className={styles.cellPrize}>{bet.winAmount && bet.status !== 'canceled' && !pendingBetIds.includes(bet.id) ? formatEuro(bet.winAmount) : '—'}</td>
                     </motion.tr>
                   ))}
                 </AnimatePresence>

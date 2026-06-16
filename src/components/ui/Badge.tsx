@@ -1,7 +1,7 @@
 import { clsx } from 'clsx'
 import styles from './Badge.module.css'
 
-type BadgeVariant = 'win' | 'lost' | 'canceled' | 'bet' | 'cancel' | 'default'
+type BadgeVariant = 'win' | 'lost' | 'canceled' | 'pending' | 'bet' | 'cancel' | 'default'
 
 interface BadgeProps {
   variant?: BadgeVariant
