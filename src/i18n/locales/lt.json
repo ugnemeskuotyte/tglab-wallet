@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "dashboard": "Pagrindinis",
+    "bets": "Mano Statymai",
+    "transactions": "Sandoriai",
+    "logout": "Atsijungti"
+  },
+  "auth": {
+    "login": "Prisijungimas",
+    "register": "Registracija",
+    "email": "El. paštas",
+    "password": "Slaptažodis",
+    "confirmPassword": "Patvirtinti slaptažodį",
+    "name": "Vardas",
+    "noAccount": "Neturite paskyros?",
+    "hasAccount": "Jau turite paskyrą?",
+    "loginBtn": "Prisijungti",
+    "registerBtn": "Sukurti paskyrą"
+  },
+  "dashboard": {
+    "balance": "Piniginės Balansas",
+    "placeBet": "Statyti",
+    "betAmount": "Statymo suma (€)",
+    "betBtn": "Statyti",
+    "betPlacing": "Statoma...",
+    "youWon": "Jūs laimėjote",
+    "youLost": "Daugiau sėkmės kitą kartą!",
+    "minBet": "Minimali statoma suma yra €1,00",
+    "maxBet": "Suma negali viršyti balanso",
+    "betSuccess": "Statymas sėkmingai atliktas"
+  },
+  "bets": {
+    "title": "Mano Statymai",
+    "id": "ID",
+    "date": "Data / Laikas",
+    "amount": "Suma",
+    "status": "Statusas",
+    "prize": "Laimėjimas",
+    "actions": "Veiksmai",
+    "cancel": "Atšaukti",
+    "canceling": "Atšaukiama...",
+    "all": "Visi",
+    "win": "Laimėta",
+    "lost": "Pralaimėta",
+    "canceled": "Atšaukta",
+    "filterStatus": "Filtruoti pagal statusą",
+    "filterById": "Ieškoti pagal ID",
+    "noBets": "Statymų nerasta",
+    "cancelConfirm": "Atšaukti šį statymą?"
+  },
+  "transactions": {
+    "title": "Sandoriai",
+    "id": "ID",
+    "date": "Data / Laikas",
+    "type": "Tipas",
+    "amount": "Suma",
+    "all": "Visi",
+    "bet": "Statymas",
+    "win": "Laimėjimas",
+    "cancel": "Atšaukimas",
+    "filterType": "Filtruoti pagal tipą",
+    "filterById": "Ieškoti pagal ID",
+    "noTransactions": "Sandorių nerasta"
+  },
+  "common": {
+    "loading": "Kraunama...",
+    "error": "Įvyko klaida",
+    "retry": "Bandyti dar kartą",
+    "previous": "Ankstesnis",
+    "next": "Kitas",
+    "page": "Puslapis",
+    "of": "iš",
+    "theme": {
+      "light": "Šviesi",
+      "dark": "Tamsi"
+    }
+  },
+  "validation": {
+    "required": "Šis laukas yra privalomas",
+    "emailInvalid": "Įveskite teisingą el. pašto adresą",
+    "passwordMin": "Slaptažodis turi būti bent 6 simbolių",
+    "passwordMatch": "Slaptažodžiai nesutampa",
+    "betMin": "Minimali suma yra €1,00",
+    "betNumber": "Įveskite teisingą sumą"
+  }
+}

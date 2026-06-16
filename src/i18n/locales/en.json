@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "bets": "My Bets",
+    "transactions": "Transactions",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginBtn": "Sign In",
+    "registerBtn": "Create Account"
+  },
+  "dashboard": {
+    "balance": "Wallet Balance",
+    "placeBet": "Place a Bet",
+    "betAmount": "Bet Amount (€)",
+    "betBtn": "Place Bet",
+    "betPlacing": "Placing...",
+    "youWon": "You won",
+    "youLost": "Better luck next time!",
+    "minBet": "Minimum bet is €1.00",
+    "maxBet": "Cannot exceed your balance",
+    "betSuccess": "Bet placed successfully"
+  },
+  "bets": {
+    "title": "My Bets",
+    "id": "ID",
+    "date": "Date / Time",
+    "amount": "Amount",
+    "status": "Status",
+    "prize": "Prize",
+    "actions": "Actions",
+    "cancel": "Cancel",
+    "canceling": "Canceling...",
+    "all": "All",
+    "win": "Win",
+    "lost": "Lost",
+    "canceled": "Canceled",
+    "filterStatus": "Filter by status",
+    "filterById": "Search by ID",
+    "noBets": "No bets found",
+    "cancelConfirm": "Cancel this bet?"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "id": "ID",
+    "date": "Date / Time",
+    "type": "Type",
+    "amount": "Amount",
+    "all": "All",
+    "bet": "Bet",
+    "win": "Win",
+    "cancel": "Cancel",
+    "filterType": "Filter by type",
+    "filterById": "Search by ID",
+    "noTransactions": "No transactions found"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "emailInvalid": "Enter a valid email address",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordMatch": "Passwords do not match",
+    "betMin": "Minimum bet is €1.00",
+    "betNumber": "Enter a valid amount"
+  }
+}
