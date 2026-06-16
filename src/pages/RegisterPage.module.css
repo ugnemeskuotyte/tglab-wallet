@@ -1,0 +1,51 @@
+@reference "../index.css";
+
+.page {
+  @apply min-h-screen bg-gray-50 flex items-center justify-center p-4;
+}
+:global(.dark) .page { @apply bg-gray-950; }
+
+.card {
+  @apply w-full max-w-sm rounded-2xl bg-white shadow-lg p-8;
+}
+:global(.dark) .card { @apply bg-gray-900; }
+
+.logoWrapper {
+  @apply mb-6 text-center;
+}
+
+.logoAccent {
+  @apply text-2xl font-bold text-teal-600;
+}
+
+.logoText {
+  @apply text-2xl font-semibold text-gray-900;
+}
+:global(.dark) .logoText { @apply text-white; }
+
+.subtitle {
+  @apply mt-1 text-sm text-gray-500;
+}
+:global(.dark) .subtitle { @apply text-gray-400; }
+
+.form {
+  @apply flex flex-col gap-4;
+}
+
+.apiError {
+  @apply rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600;
+}
+:global(.dark) .apiError { @apply bg-red-950 text-red-400; }
+
+.submitBtn {
+  @apply mt-2 w-full;
+}
+
+.footer {
+  @apply mt-4 text-center text-sm text-gray-500;
+}
+:global(.dark) .footer { @apply text-gray-400; }
+
+.footerLink {
+  @apply font-medium text-teal-600 hover:underline;
+}
