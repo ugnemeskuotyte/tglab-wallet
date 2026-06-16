@@ -46,4 +46,6 @@
 .cellPrize { @apply px-4 py-3 text-right text-green-600 font-medium; }
 :global(.dark) .cellPrize { @apply text-green-400; }
 
+.pendingCell { @apply inline-flex items-center gap-2; }
+
 .paginationWrapper { @apply px-4 pb-4; }

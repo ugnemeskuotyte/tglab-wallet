@@ -27,7 +27,8 @@
     "youLost": "Daugiau sėkmės kitą kartą!",
     "minBet": "Minimali statoma suma yra €1,00",
     "maxBet": "Suma negali viršyti balanso",
-    "betSuccess": "Statymas sėkmingai atliktas"
+    "betSuccess": "Statymas sėkmingai atliktas",
+    "betPending": "Statymas pateiktas — laukiama rezultato..."
   },
   "bets": {
     "title": "Mano Statymai",
@@ -43,6 +44,7 @@
     "win": "Laimėta",
     "lost": "Pralaimėta",
     "canceled": "Atšaukta",
+    "pending": "Laukiama",
     "filterStatus": "Filtruoti pagal statusą",
     "filterById": "Ieškoti pagal ID",
     "noBets": "Statymų nerasta",

@@ -19,6 +19,12 @@
 .apiError { @apply rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600; }
 :global(.dark) .apiError { @apply bg-red-950 text-red-400; }
 
+.resultPending { @apply mt-4 rounded-xl p-4 text-center bg-yellow-50 border border-yellow-200; }
+:global(.dark) .resultPending { @apply bg-yellow-950 border-yellow-800; }
+
+.resultTitlePending { @apply font-semibold text-yellow-700; }
+:global(.dark) .resultTitlePending { @apply text-yellow-300; }
+
 .resultWin { @apply mt-4 rounded-xl p-4 text-center bg-green-50 border border-green-200; }
 :global(.dark) .resultWin { @apply bg-green-950 border-green-800; }
 
