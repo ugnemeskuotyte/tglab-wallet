@@ -1,0 +1,5 @@
+@reference "../../index.css";
+
+.spinner {
+  @apply animate-spin text-teal-600;
+}

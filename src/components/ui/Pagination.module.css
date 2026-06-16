@@ -1,0 +1,12 @@
+@reference "../../index.css";
+
+.wrapper {
+  @apply flex items-center justify-between gap-2 pt-4;
+}
+
+.info {
+  @apply text-sm text-gray-600;
+}
+:global(.dark) .info {
+  @apply text-gray-400;
+}
