@@ -1,0 +1,111 @@
+@reference "../index.css";
+
+.root {
+  @apply min-h-screen bg-gray-50 text-gray-900 transition-colors;
+}
+:global(.dark) .root {
+  @apply bg-gray-950 text-gray-100;
+}
+
+.header {
+  @apply sticky top-0 z-10 border-b border-gray-200 bg-white shadow-sm;
+}
+:global(.dark) .header {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.headerInner {
+  @apply mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3;
+}
+
+.logo {
+  @apply text-lg font-bold text-teal-600;
+}
+
+.logoText {
+  @apply text-lg font-semibold text-gray-900;
+}
+:global(.dark) .logoText {
+  @apply text-white;
+}
+
+.desktopNav {
+  @apply hidden sm:flex items-center gap-1;
+}
+
+.navLink {
+  @apply text-sm font-medium px-3 py-2 rounded-lg transition-colors text-gray-600;
+}
+.navLink:hover { @apply bg-gray-100; }
+:global(.dark) .navLink { @apply text-gray-300; }
+:global(.dark) .navLink:hover { @apply bg-gray-700; }
+
+.navLinkActive {
+  @apply bg-teal-100 text-teal-800;
+}
+:global(.dark) .navLinkActive {
+  @apply bg-teal-900 text-teal-200;
+}
+
+.headerActions {
+  @apply flex items-center gap-2;
+}
+
+.balanceCard {
+  @apply rounded-lg bg-teal-50 border border-teal-200 px-3 py-1.5;
+}
+:global(.dark) .balanceCard {
+  @apply bg-teal-950 border-teal-800;
+}
+
+.balanceName {
+  @apply text-xs text-teal-600 font-medium leading-none mb-0.5;
+}
+:global(.dark) .balanceName { @apply text-teal-400; }
+
+.balanceAmount {
+  @apply text-sm font-bold text-teal-700;
+}
+:global(.dark) .balanceAmount { @apply text-teal-300; }
+
+.langBtn {
+  @apply rounded-lg px-2.5 py-2 text-xs font-semibold text-gray-600 transition-colors uppercase;
+}
+.langBtn:hover { @apply bg-gray-100; }
+:global(.dark) .langBtn { @apply text-gray-300; }
+:global(.dark) .langBtn:hover { @apply bg-gray-700; }
+
+.iconBtn {
+  @apply rounded-lg p-2 text-gray-600 transition-colors;
+}
+.iconBtn:hover { @apply bg-gray-100; }
+:global(.dark) .iconBtn { @apply text-gray-300; }
+:global(.dark) .iconBtn:hover { @apply bg-gray-700; }
+
+.icon {
+  @apply h-4 w-4;
+}
+
+.logoutBtn {
+  @apply rounded-lg px-3 py-2 text-sm text-gray-600 transition-colors;
+}
+.logoutBtn:hover { @apply bg-gray-100; }
+:global(.dark) .logoutBtn { @apply text-gray-300; }
+:global(.dark) .logoutBtn:hover { @apply bg-gray-700; }
+
+.mobileNav {
+  @apply flex sm:hidden border-t border-gray-100;
+}
+:global(.dark) .mobileNav { @apply border-gray-800; }
+
+.mobileNavLink {
+  @apply flex-1 py-2 text-center text-xs font-medium text-gray-500;
+}
+
+.mobileNavLinkActive {
+  @apply text-teal-600;
+}
+
+.main {
+  @apply mx-auto max-w-5xl px-4 py-8;
+}

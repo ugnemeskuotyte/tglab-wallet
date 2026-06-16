@@ -1,0 +1,33 @@
+@reference "../../index.css";
+
+.wrapper {
+  @apply flex flex-col gap-1;
+}
+
+.label {
+  @apply text-sm font-medium text-gray-700;
+}
+:global(.dark) .label {
+  @apply text-gray-300;
+}
+
+.input {
+  @apply rounded-lg border px-3 py-2 text-sm outline-none transition-colors;
+  @apply bg-white text-gray-900 placeholder:text-gray-400;
+  @apply border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200;
+}
+:global(.dark) .input {
+  @apply bg-gray-800 text-gray-100 placeholder:text-gray-500;
+  @apply border-gray-600 focus:ring-teal-800;
+}
+
+.inputError {
+  @apply border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200;
+}
+:global(.dark) .inputError {
+  @apply focus:ring-red-800;
+}
+
+.error {
+  @apply text-xs text-red-500;
+}
