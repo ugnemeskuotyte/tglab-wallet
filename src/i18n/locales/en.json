@@ -72,6 +72,8 @@
     "next": "Next",
     "page": "Page",
     "of": "of",
+    "clickToCopy": "Click to copy",
+    "copied": "Copied!",
     "theme": {
       "light": "Light",
       "dark": "Dark"

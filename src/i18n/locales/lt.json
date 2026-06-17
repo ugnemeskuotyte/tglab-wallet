@@ -72,6 +72,8 @@
     "next": "Kitas",
     "page": "Puslapis",
     "of": "iš",
+    "clickToCopy": "Spustelėkite, kad nukopijuotumėte",
+    "copied": "Nukopijuota!",
     "theme": {
       "light": "Šviesi",
       "dark": "Tamsi"
