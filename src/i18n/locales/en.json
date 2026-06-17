@@ -23,7 +23,6 @@
     "betAmount": "Bet Amount (€)",
     "betBtn": "Place Bet",
     "betPlacing": "Placing...",
-    "minBet": "Minimum bet is €1.00",
     "maxBet": "Cannot exceed your balance",
     "betSuccess": "Bet placed successfully",
     "recentBets": "Recent Bets"
@@ -43,10 +42,8 @@
     "lost": "Lost",
     "canceled": "Canceled",
     "pending": "Pending",
-    "filterStatus": "Filter by status",
     "filterById": "Search by ID",
-    "noBets": "No bets found",
-    "cancelConfirm": "Cancel this bet?"
+    "noBets": "No bets found"
   },
   "transactions": {
     "title": "Transactions",
@@ -58,12 +55,10 @@
     "bet": "Bet",
     "win": "Win",
     "cancel": "Cancel",
-    "filterType": "Filter by type",
     "filterById": "Search by ID",
     "noTransactions": "No transactions found"
   },
   "common": {
-    "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Retry",
     "previous": "Previous",
@@ -71,11 +66,7 @@
     "page": "Page",
     "of": "of",
     "clickToCopy": "Click to copy",
-    "copied": "Copied!",
-    "theme": {
-      "light": "Light",
-      "dark": "Dark"
-    }
+    "copied": "Copied!"
   },
   "validation": {
     "required": "This field is required",

@@ -23,7 +23,6 @@
     "betAmount": "Statymo suma (€)",
     "betBtn": "Statyti",
     "betPlacing": "Statoma...",
-    "minBet": "Minimali statoma suma yra €1,00",
     "maxBet": "Suma negali viršyti balanso",
     "betSuccess": "Statymas sėkmingai atliktas",
     "recentBets": "Paskutiniai statymai"
@@ -43,10 +42,8 @@
     "lost": "Pralaimėta",
     "canceled": "Atšaukta",
     "pending": "Laukiama",
-    "filterStatus": "Filtruoti pagal statusą",
     "filterById": "Ieškoti pagal ID",
-    "noBets": "Statymų nerasta",
-    "cancelConfirm": "Atšaukti šį statymą?"
+    "noBets": "Statymų nerasta"
   },
   "transactions": {
     "title": "Sandoriai",
@@ -58,12 +55,10 @@
     "bet": "Statymas",
     "win": "Laimėjimas",
     "cancel": "Atšaukimas",
-    "filterType": "Filtruoti pagal tipą",
     "filterById": "Ieškoti pagal ID",
     "noTransactions": "Sandorių nerasta"
   },
   "common": {
-    "loading": "Kraunama...",
     "error": "Įvyko klaida",
     "retry": "Bandyti dar kartą",
     "previous": "Ankstesnis",
@@ -71,11 +66,7 @@
     "page": "Puslapis",
     "of": "iš",
     "clickToCopy": "Spustelėkite, kad nukopijuotumėte",
-    "copied": "Nukopijuota!",
-    "theme": {
-      "light": "Šviesi",
-      "dark": "Tamsi"
-    }
+    "copied": "Nukopijuota!"
   },
   "validation": {
     "required": "Šis laukas yra privalomas",
