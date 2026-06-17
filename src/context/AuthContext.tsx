@@ -1,7 +1,13 @@
-import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useRef, useEffect, type ReactNode } from 'react'
 import type { User } from '../types'
 
 const PENDING_DURATION = 5000
+const WS_RECONNECT_DELAY = 3000
+
+function getWsUrl(token: string): string {
+  const wsBase = import.meta.env.VITE_API_BASE_URL.replace(/^http/, 'ws')
+  return `${wsBase}/ws?token=${token}`
+}
 
 interface AuthContextValue {
   user: User | null
@@ -65,6 +71,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       delete pendingTimers.current[id]
     }, PENDING_DURATION)
   }, [updateBalance])
+
+  const accessToken = user?.accessToken
+
+  useEffect(() => {
+    if (!accessToken) return
+
+    let socket: WebSocket | null = null
+    let reconnectTimer: ReturnType<typeof setTimeout>
+    let stopped = false
+
+    function connect() {
+      socket = new WebSocket(getWsUrl(accessToken!))
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data) as { type: string; balance: number }
+        if (data.type === 'balance') updateBalance(data.balance)
+      }
+
+      socket.onclose = () => {
+        if (!stopped) reconnectTimer = setTimeout(connect, WS_RECONNECT_DELAY)
+      }
+    }
+
+    connect()
+
+    return () => {
+      stopped = true
+      clearTimeout(reconnectTimer)
+      socket?.close()
+    }
+  }, [accessToken, updateBalance])
 
   return (
     <AuthContext.Provider
