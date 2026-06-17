@@ -23,12 +23,10 @@
     "betAmount": "Bet Amount (€)",
     "betBtn": "Place Bet",
     "betPlacing": "Placing...",
-    "youWon": "You won",
-    "youLost": "Better luck next time!",
     "minBet": "Minimum bet is €1.00",
     "maxBet": "Cannot exceed your balance",
     "betSuccess": "Bet placed successfully",
-    "betPending": "Bet placed — awaiting result..."
+    "recentBets": "Recent Bets"
   },
   "bets": {
     "title": "My Bets",
