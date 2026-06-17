@@ -1,0 +1,11 @@
+@reference "../../index.css";
+
+.base {
+  @apply font-mono text-xs cursor-pointer truncate max-w-full block text-left bg-transparent border-0 p-0 hover:underline hover:text-blue-600;
+}
+:global(.dark) .base:hover { @apply text-blue-400; }
+
+.copied {
+  @apply text-green-600 font-medium no-underline;
+}
+:global(.dark) .copied { @apply text-green-400; }

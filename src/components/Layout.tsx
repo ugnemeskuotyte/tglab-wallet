@@ -51,7 +51,7 @@ export default function Layout() {
             </div>
 
             <button onClick={toggleLang} className={styles.langBtn} aria-label="Toggle language">
-              {i18n.language === 'en' ? 'LT' : 'EN'}
+              {i18n.language === 'en' ? 'EN' : 'LT'}
             </button>
 
             <button onClick={toggleTheme} className={styles.iconBtn} aria-label="Toggle theme">

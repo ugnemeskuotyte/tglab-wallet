@@ -14,10 +14,13 @@ import type { BetResult } from '../types'
 
 function buildSchema(balance: number, t: (k: string) => string) {
   return z.object({
-    amount: z
-      .number({ invalid_type_error: t('validation.betNumber') })
-      .min(1, t('validation.betMin'))
-      .max(balance, t('dashboard.maxBet')),
+    amount: z.preprocess(
+      (val) => (typeof val === 'number' && Number.isNaN(val) ? 0 : val),
+      z
+        .number({ invalid_type_error: t('validation.betNumber') })
+        .min(1, t('validation.betMin'))
+        .max(balance, t('dashboard.maxBet')),
+    ),
   })
 }
 

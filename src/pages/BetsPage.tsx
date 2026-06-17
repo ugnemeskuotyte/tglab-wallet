@@ -5,7 +5,7 @@ import { listBets, cancelBet } from '../api/bets'
 import { useAuth } from '../context/AuthContext'
 import { formatEuro } from '../utils/currency'
 import { formatDateTime } from '../utils/date'
-import { Badge, Button, Pagination, Spinner } from '../components'
+import { Badge, Button, CopyableId, Pagination, Spinner } from '../components'
 import { getErrorMessage } from '../utils/error'
 import styles from './BetsPage.module.css'
 import type { Bet, BetStatus, BetsFilter } from '../types'
@@ -116,7 +116,7 @@ export default function BetsPage() {
                       exit={{ opacity: 0 }}
                       className={styles.row}
                     >
-                      <td className={styles.cellId}>{bet.id}</td>
+                      <td className={styles.cellId}><CopyableId value={bet.id} /></td>
                       <td className={styles.cellDate}>{formatDateTime(bet.createdAt)}</td>
                       <td className={styles.cellAmount}>{formatEuro(bet.amount)}</td>
                       <td className={styles.cellCenter}>

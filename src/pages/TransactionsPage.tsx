@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { listTransactions } from '../api/transactions'
 import { formatEuro } from '../utils/currency'
 import { formatDateTime } from '../utils/date'
-import { Badge, Button, Pagination, Spinner } from '../components'
+import { Badge, Button, CopyableId, Pagination, Spinner } from '../components'
 import styles from './TransactionsPage.module.css'
 import type { Transaction, TransactionType, TransactionsFilter } from '../types'
 
@@ -99,7 +99,7 @@ export default function TransactionsPage() {
                       exit={{ opacity: 0 }}
                       className={styles.row}
                     >
-                      <td className={styles.cellId}>{tx.id}</td>
+                      <td className={styles.cellId}><CopyableId value={tx.id} /></td>
                       <td className={styles.cellDate}>{formatDateTime(tx.createdAt)}</td>
                       <td className={styles.cellCenter}>
                         <Badge variant={tx.type}>{t(`transactions.${tx.type}`)}</Badge>
