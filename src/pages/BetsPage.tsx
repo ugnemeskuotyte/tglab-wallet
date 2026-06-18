@@ -1,12 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { motion, AnimatePresence } from 'framer-motion'
-import { listBets, cancelBet } from '../api/bets'
-import { useAuth } from '../context/AuthContext'
-import { formatEuro } from '../utils/currency'
-import { formatDateTime } from '../utils/date'
-import { Badge, Button, CopyableId, Pagination, Spinner } from '../components'
-import { getErrorMessage } from '../utils/error'
+import { listBets, cancelBet } from '../api'
+import { useWallet } from '../context'
+import { formatEuro, formatDateTime, getErrorMessage } from '../utils'
+import { Badge, Button, CopyableId, DataTable, DataTableRow } from '../components'
 import styles from './BetsPage.module.css'
 import type { Bet, BetStatus, BetsFilter } from '../types'
 
@@ -14,7 +11,7 @@ const PAGE_LIMIT = 10
 
 export default function BetsPage() {
   const { t } = useTranslation()
-  const { updateBalance, pendingBetIds, removePendingBet } = useAuth()
+  const { updateBalance, pendingBetIds, removePendingBet } = useWallet()
 
   const [bets, setBets] = useState<Bet[]>([])
   const [total, setTotal] = useState(0)
@@ -84,73 +81,51 @@ export default function BetsPage() {
         />
       </div>
 
-      <div className={styles.tableCard}>
-        {loading ? (
-          <div className={styles.centered}><Spinner /></div>
-        ) : error ? (
-          <div className={styles.errorContainer}>
-            <p className={styles.errorMessage}>{error}</p>
-            <Button variant="secondary" onClick={() => fetch(filter)}>{t('common.retry')}</Button>
-          </div>
-        ) : bets.length === 0 ? (
-          <p className={styles.empty}>{t('bets.noBets')}</p>
-        ) : (
-          <div className={styles.tableScroll}>
-            <table className={styles.table}>
-              <thead className={styles.thead}>
-                <tr>
-                  <th className={styles.thLeft}>{t('bets.id')}</th>
-                  <th className={styles.thLeft}>{t('bets.date')}</th>
-                  <th className={styles.thRight}>{t('bets.amount')}</th>
-                  <th className={styles.thCenter}>{t('bets.status')}</th>
-                  <th className={styles.thRight}>{t('bets.prize')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <AnimatePresence initial={false}>
-                  {bets.map((bet) => (
-                    <motion.tr
-                      key={bet.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className={styles.row}
-                    >
-                      <td className={styles.cellId}><CopyableId value={bet.id} /></td>
-                      <td className={styles.cellDate}>{formatDateTime(bet.createdAt)}</td>
-                      <td className={styles.cellAmount}>{formatEuro(bet.amount)}</td>
-                      <td className={styles.cellCenter}>
-                        {pendingBetIds.includes(bet.id) ? (
-                          <div className={styles.pendingCell}>
-                            <Badge variant="pending">{t('bets.pending')}</Badge>
-                            <Button
-                              variant="danger"
-                              size="sm"
-                              loading={cancelingId === bet.id}
-                              onClick={() => handleCancel(bet.id)}
-                            >
-                              {t('bets.cancel')}
-                            </Button>
-                          </div>
-                        ) : (
-                          <Badge variant={bet.status}>{t(`bets.${bet.status}`)}</Badge>
-                        )}
-                      </td>
-                      <td className={styles.cellPrize}>{bet.winAmount && bet.status !== 'canceled' && !pendingBetIds.includes(bet.id) ? formatEuro(bet.winAmount) : '—'}</td>
-                    </motion.tr>
-                  ))}
-                </AnimatePresence>
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        {!loading && !error && (
-          <div className={styles.paginationWrapper}>
-            <Pagination page={filter.page} total={total} limit={PAGE_LIMIT} onChange={(p) => setFilter((f) => ({ ...f, page: p }))} />
-          </div>
-        )}
-      </div>
+      <DataTable
+        columns={[
+          { label: t('bets.id') },
+          { label: t('bets.date') },
+          { label: t('bets.amount'), align: 'right' },
+          { label: t('bets.status'), align: 'center' },
+          { label: t('bets.prize'), align: 'right' },
+        ]}
+        loading={loading}
+        error={error}
+        onRetry={() => fetch(filter)}
+        retryLabel={t('common.retry')}
+        isEmpty={bets.length === 0}
+        emptyMessage={t('bets.noBets')}
+        page={filter.page}
+        total={total}
+        limit={PAGE_LIMIT}
+        onPageChange={(p) => setFilter((f) => ({ ...f, page: p }))}
+      >
+        {bets.map((bet) => (
+          <DataTableRow key={bet.id}>
+            <td className={styles.cellId}><CopyableId value={bet.id} /></td>
+            <td className={styles.cellDate}>{formatDateTime(bet.createdAt)}</td>
+            <td className={styles.cellAmount}>{formatEuro(bet.amount)}</td>
+            <td className={styles.cellCenter}>
+              {pendingBetIds.includes(bet.id) ? (
+                <div className={styles.pendingCell}>
+                  <Badge variant="pending">{t('bets.pending')}</Badge>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    loading={cancelingId === bet.id}
+                    onClick={() => handleCancel(bet.id)}
+                  >
+                    {t('bets.cancel')}
+                  </Button>
+                </div>
+              ) : (
+                <Badge variant={bet.status}>{t(`bets.${bet.status}`)}</Badge>
+              )}
+            </td>
+            <td className={styles.cellPrize}>{bet.winAmount && bet.status !== 'canceled' && !pendingBetIds.includes(bet.id) ? formatEuro(bet.winAmount) : '—'}</td>
+          </DataTableRow>
+        ))}
+      </DataTable>
     </div>
   )
 }

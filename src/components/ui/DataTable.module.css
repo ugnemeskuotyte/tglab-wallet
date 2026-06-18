@@ -1,0 +1,28 @@
+@reference "../../index.css";
+
+.tableCard { @apply rounded-2xl bg-white shadow overflow-hidden; }
+:global(.dark) .tableCard { @apply bg-gray-900; }
+
+.centered { @apply flex justify-center py-12; }
+.errorContainer { @apply py-12 text-center; }
+.errorMessage { @apply text-gray-500 mb-3; }
+.empty { @apply py-12 text-center text-gray-400; }
+.tableScroll { @apply overflow-x-auto; }
+.table { @apply w-full text-sm; }
+
+.thead tr { @apply border-b border-gray-100 bg-gray-50; }
+:global(.dark) .thead tr { @apply border-gray-800 bg-gray-800; }
+
+.thLeft { @apply px-4 py-3 text-left font-medium text-gray-500; }
+:global(.dark) .thLeft { @apply text-gray-400; }
+.thRight { @apply px-4 py-3 text-right font-medium text-gray-500; }
+:global(.dark) .thRight { @apply text-gray-400; }
+.thCenter { @apply px-4 py-3 text-center font-medium text-gray-500; }
+:global(.dark) .thCenter { @apply text-gray-400; }
+
+.row { @apply border-b border-gray-50 transition-colors; }
+.row:hover { @apply bg-gray-50; }
+:global(.dark) .row { @apply border-gray-800; }
+:global(.dark) .row:hover { @apply bg-gray-800; }
+
+.paginationWrapper { @apply px-4 pb-4; }

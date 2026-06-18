@@ -1,13 +1,13 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { clsx } from 'clsx'
-import { useAuth } from '../context/AuthContext'
-import { useTheme } from '../context/ThemeContext'
-import { formatEuro } from '../utils/currency'
+import { useAuth, useWallet, useTheme } from '../context'
+import { formatEuro } from '../utils'
 import styles from './Layout.module.css'
 
 export default function Layout() {
   const { user, logout } = useAuth()
+  const { balance } = useWallet()
   const { theme, toggleTheme } = useTheme()
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
@@ -47,7 +47,7 @@ export default function Layout() {
           <div className={styles.headerActions}>
             <div className={styles.balanceCard}>
               <p className={styles.balanceName}>{user?.name}</p>
-              <p className={styles.balanceAmount}>{formatEuro(user?.balance ?? 0)}</p>
+              <p className={styles.balanceAmount}>{formatEuro(balance)}</p>
             </div>
 
             <button onClick={toggleLang} className={styles.langBtn} aria-label="Toggle language">

@@ -1,9 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { listBets, cancelBet } from '../api/bets'
-import { useAuth } from '../context/AuthContext'
-import { formatEuro } from '../utils/currency'
-import { getErrorMessage } from '../utils/error'
+import { listBets, cancelBet } from '../api'
+import { useWallet } from '../context'
+import { formatEuro, getErrorMessage } from '../utils'
 import { Badge, Button, Spinner } from './ui'
 import styles from './RecentBets.module.css'
 import type { Bet } from '../types'
@@ -12,7 +11,7 @@ const RECENT_LIMIT = 5
 
 export default function RecentBets() {
   const { t } = useTranslation()
-  const { pendingBetIds, removePendingBet, updateBalance } = useAuth()
+  const { pendingBetIds, removePendingBet, updateBalance } = useWallet()
 
   const [bets, setBets] = useState<Bet[]>([])
   const [loading, setLoading] = useState(true)

@@ -4,11 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
-import { placeBet } from '../api/bets'
-import { useAuth } from '../context/AuthContext'
-import { formatEuro } from '../utils/currency'
+import { placeBet } from '../api'
+import { useAuth, useWallet } from '../context'
+import { formatEuro, getErrorMessage } from '../utils'
 import { Input, Button, Toast, RecentBets } from '../components'
-import { getErrorMessage } from '../utils/error'
 import styles from './DashboardPage.module.css'
 
 function buildSchema(balance: number, t: (k: string) => string) {
@@ -16,35 +15,38 @@ function buildSchema(balance: number, t: (k: string) => string) {
     amount: z.preprocess(
       (val) => (typeof val === 'number' && Number.isNaN(val) ? 0 : val),
       z
-        .number({ invalid_type_error: t('validation.betNumber') })
+        .number({ message: t('validation.betNumber') })
         .min(1, t('validation.betMin'))
         .max(balance, t('dashboard.maxBet')),
     ),
   })
 }
 
-type FormData = { amount: number }
+type Schema = ReturnType<typeof buildSchema>
+type FormInput = z.input<Schema>
+type FormOutput = z.output<Schema>
 
 export default function DashboardPage() {
   const { t } = useTranslation()
-  const { user, updateBalance, addPendingBet } = useAuth()
+  const { user } = useAuth()
+  const { balance, updateBalance, addPendingBet } = useWallet()
   const [toast, setToast] = useState<string | null>(null)
   const [apiError, setApiError] = useState<string | null>(null)
 
-  const schema = buildSchema(user?.balance ?? 0, t)
+  const schema = buildSchema(balance, t)
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  } = useForm<FormInput, unknown, FormOutput>({ resolver: zodResolver(schema) })
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: FormOutput) {
     setApiError(null)
     try {
       const res = await placeBet(data.amount)
-      updateBalance((user?.balance ?? 0) - data.amount)
+      updateBalance(balance - data.amount)
       addPendingBet(res.transactionId, res.balance)
       setToast(t('dashboard.betSuccess'))
       reset()
@@ -64,13 +66,13 @@ export default function DashboardPage() {
           >
             <p className={styles.balanceLabel}>{t('dashboard.balance')}</p>
             <motion.p
-              key={user?.balance}
+              key={balance}
               initial={{ scale: 1.05 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3 }}
               className={styles.balanceAmount}
             >
-              {formatEuro(user?.balance ?? 0)}
+              {formatEuro(balance)}
             </motion.p>
             <p className={styles.balanceName}>{user?.name}</p>
           </motion.div>
