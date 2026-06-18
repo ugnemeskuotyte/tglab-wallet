@@ -9,9 +9,9 @@ A React + TypeScript digital wallet for an online betting platform, built agains
 
 ## Required mock-api changes
 
-The published mock-api doesn't support CORS or WebSockets, and has a balance bug on bet cancellation. Apply these to `api.js`:
+Apply these to `api.js`:
 
-1. **CORS** (needed since the frontend runs on a different origin):
+1. **CORS**:
    ```js
    const cors = require("cors");
    app.use(cors());
@@ -66,28 +66,16 @@ npm run dev
 
 ## Implemented features
 
-### User management
-- Registration (`POST /register`) and login (`POST /login`); the JWT is stored and sent as `Authorization: Bearer <token>` on every request. A `401` response clears stored auth and redirects to `/login`.
-
-### Betting
-- Place a bet (`POST /bet`): minimum €1.00, capped at the current balance.
-- List bets (`GET /my-bets`): ID, date/time, amount, status, prize — with status/ID filters and pagination.
-- Cancel a bet (`DELETE /my-bet/:id`); only offered while a bet is pending.
-
-### Wallet
-- Euro balance shown in the header on every authenticated page, updated live via WebSocket and optimistically while a bet is pending.
-- Transaction history (`GET /my-transactions`): ID, date/time, type, amount — with type/ID filters and pagination.
-
-### Other requirements
-- Responsive layout; public/private route guards; Euro formatting (`€10.50`) via a shared `formatEuro` utility; form validation (required fields, type/range checks, translated API error messages).
-
-### Bonus features
-- Real-time balance updates via WebSockets (with reconnect), light/dark theme toggle, English/Lithuanian i18n, Framer Motion UI animations.
-
-## Technical decisions
-
-- **`AuthContext` vs `WalletContext`.** Auth (`user`, `login`, `logout`) and wallet state (`balance`, pending bets, the WebSocket) are split: `WalletProvider` nests inside `AuthProvider` and reads the access token from it, since balance/pending-bet logic depends on auth, not vice versa.
-- **Optimistic pending bets.** Placing a bet immediately deducts from the displayed balance and marks it "pending"; the real settlement arrives via the WebSocket push, clearing the pending state.
-- **Barrel exports.** Each top-level folder (`api`, `components`, `context`, `pages`, `routes`, `utils`) has an `index.ts` re-exporting its public surface.
-- **Shared `DataTable`.** The bets and transactions tables had identical loading/error/empty/pagination shells (and CSS); extracted into one `DataTable` component.
-- **CSS Modules over inline Tailwind.** Utility classes are composed in `*.module.css` via `@apply`, not written inline in JSX.
+- Registration & login 
+- Place bets
+- List bets (filters + pagination)
+- Cancel bets
+- Wallet balance display
+- Transaction history (filters + pagination)
+- Responsive layout
+- Public/private route protection
+- Euro currency formatting
+- Form validation
+- Real-time balance updates (WebSocket)
+- Light/dark theme toggle
+- Multi-language support (English, Lithuanian)
