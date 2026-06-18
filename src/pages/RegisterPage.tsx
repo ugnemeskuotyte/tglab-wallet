@@ -4,10 +4,10 @@ import { z } from 'zod'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
-import { register as registerUser, login } from '../api/auth'
-import { useAuth } from '../context/AuthContext'
+import { register as registerUser, login } from '../api'
+import { useAuth } from '../context'
 import { Input, Button } from '../components'
-import { getErrorMessage } from '../utils/error'
+import { getErrorMessage } from '../utils'
 import styles from './RegisterPage.module.css'
 
 const schema = z
